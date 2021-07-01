@@ -21,10 +21,10 @@ impl From<bool> for State {
     }
 }
 
-impl From<char> for State {
-    fn from(c: char) -> Self {
+impl From<u8> for State {
+    fn from(c: u8) -> Self {
         match c {
-            '.' => State::DEAD,
+            b'.' | b'0' => State::DEAD,
             _ => State::ALIVE,
         }
     }
@@ -146,7 +146,7 @@ impl TryFrom<&str> for Board {
         }
         let s = value
             .lines()
-            .map(|line| line.chars().map(State::from).collect())
+            .map(|line| line.bytes().map(State::from).collect())
             .collect();
         Ok(Self { state: s })
     }
