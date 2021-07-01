@@ -44,12 +44,12 @@ fn main() -> Result<()> {
 
     let mut stdout = stdout();
     loop {
-        board = board.next_board_state();
-
         stdout
             .queue(terminal::Clear(terminal::ClearType::All))?
             .queue(style::Print(&board))?
             .flush()?;
+
+        board = board.next_board_state();
 
         sleep(Duration::from_secs_f64(1. / opt.fps));
     }
